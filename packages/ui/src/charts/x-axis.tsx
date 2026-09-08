@@ -20,6 +20,8 @@ export interface XAxisProps {
    * `"domain"` — evenly spaced ticks across the time domain (may not align with hover).
    */
   tickMode?: "domain" | "data";
+  /** Optional labels aligned with data rows for the displayed ticks. */
+  labels?: string[];
 }
 
 interface AxisTick {
@@ -576,10 +578,19 @@ const XAxisInner = memo(function XAxisInner({
   numTicks = 5,
   tickerHalfWidth = 50,
   tickMode = "data",
+  labels: labelsProp,
   container,
 }: XAxisProps & { container: HTMLDivElement }) {
-  const { xScale, margin, tooltipData, data, xAccessor, dateLabels, xDomain } =
-    useChart();
+  const {
+    xScale,
+    margin,
+    tooltipData,
+    data,
+    xAccessor,
+    dateLabels: contextDateLabels,
+    xDomain,
+  } = useChart();
+  const dateLabels = labelsProp ?? contextDateLabels;
 
   const labelsToShow = useMemo(() => {
     const projectionExtendsScale =
