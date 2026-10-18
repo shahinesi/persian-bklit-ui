@@ -86,6 +86,9 @@ export interface LineConfig {
   strokeWidth: number;
   /** Scale group id (Recharts `yAxisId`). Default: `"left"`. */
   yAxisId?: string | number;
+  showValue?: boolean;
+  valueLabelFormatter?: (value: number) => string;
+  valueLabelColor?: string | ((value: number) => string);
 }
 
 /**

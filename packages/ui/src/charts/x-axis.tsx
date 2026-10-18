@@ -663,7 +663,6 @@ const XAxisInner = memo(function XAxisInner({
     xAccessor,
     xScale,
     margin.left,
-    numTicks,
     resolvedNumTicks,
   ]);
 

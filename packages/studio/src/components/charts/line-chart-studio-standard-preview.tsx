@@ -165,6 +165,7 @@ function renderMainLines(
         key={`line-${key}`}
         loading={studioCartesianSeriesLoadingProp(isPrimary)}
         showHighlight={getSeriesShowHighlight(state, idx)}
+        showValue={state.lineShowValue}
         stroke={getEffectiveSeriesColor(state, idx)}
         strokeWidth={getSeriesStrokeWidth(state, idx)}
         yAxisId={getLineSeriesYAxisId(state, idx)}

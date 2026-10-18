@@ -13,7 +13,9 @@ export function resolveResponsiveChartLabelCount(
   viewportWidth: number,
   fallback: number
 ): number {
-  if (typeof value === "number") return value;
+  if (typeof value === "number") {
+    return value;
+  }
 
   const candidates = [
     [1280, value.xl],

@@ -492,7 +492,7 @@ export function cartesianCodegen(
           idx === 0 ? "" : ` stroke="${SERIES_COLOR_BY_INDEX[idx]}"`;
         const seriesProps = seriesStrokePropsCodegen(state, idx);
         const curveName = curveImportName(getSeriesCurve(state, idx));
-        return `\n  <Line dataKey="${key}"${strokeAttr} curve={${curveName}} strokeWidth={${getSeriesStrokeWidth(state, idx)}} ${fadeEdgesCodegen(getSeriesFadeEdges(state, idx))} showHighlight={${getSeriesShowHighlight(state, idx)}}${seriesProps} />`;
+        return `\n  <Line dataKey="${key}"${strokeAttr} curve={${curveName}} strokeWidth={${getSeriesStrokeWidth(state, idx)}} ${fadeEdgesCodegen(getSeriesFadeEdges(state, idx))} showHighlight={${getSeriesShowHighlight(state, idx)}} showValue={${state.lineShowValue}}${seriesProps} />`;
       })
       .join("");
   } else if (state.pattern === "none") {

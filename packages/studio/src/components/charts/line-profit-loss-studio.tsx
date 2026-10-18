@@ -156,6 +156,7 @@ export function LineProfitLossStudioChart({
             dataKey={STUDIO_PROFIT_LOSS_DATA_KEY}
             fadeEdges={fadeEdges}
             showHighlight={false}
+            showValue={state.lineShowValue}
             stroke="transparent"
             strokeWidth={0}
           />

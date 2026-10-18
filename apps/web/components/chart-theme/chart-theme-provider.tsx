@@ -1,6 +1,5 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import {
   createContext,
   type ReactNode,
@@ -48,7 +47,6 @@ export function ChartThemeProvider({
   children: ReactNode;
   initialThemeId?: string;
 }) {
-  const { resolvedTheme } = useTheme();
   const [themeId, setThemeIdState] = useState(initialThemeId);
   const theme = getChartTheme(themeId);
 
@@ -64,7 +62,7 @@ export function ChartThemeProvider({
       studioMode,
       studioElement: studioShell,
     });
-  }, [theme, resolvedTheme]);
+  }, [theme]);
 
   const setThemeId = useCallback((id: string) => {
     const nextTheme = getChartTheme(id);

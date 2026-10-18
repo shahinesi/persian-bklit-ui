@@ -24,6 +24,7 @@ import {
   resolveRestingChartPhase,
 } from "./chart-phase";
 import { Line, type LineProps } from "./line";
+import { LineValueLabels } from "./line-value-labels";
 import { TimeSeriesChartInner } from "./time-series-chart-shell";
 
 export interface LineChartProps {
@@ -122,6 +123,9 @@ function extractLineConfigs(children: ReactNode): LineConfig[] {
           stroke: props.stroke || "var(--chart-line-primary)",
           strokeWidth: props.strokeWidth || 2.5,
           yAxisId: props.yAxisId,
+          showValue: props.showValue,
+          valueLabelFormatter: props.valueLabelFormatter,
+          valueLabelColor: props.valueLabelColor,
         });
         return;
       }
@@ -206,6 +210,7 @@ function ChartInner({
       yDomainTweenDuration={yDomainTweenDuration}
     >
       {children}
+      <LineValueLabels series={lines} />
     </TimeSeriesChartInner>
   );
 }

@@ -71,6 +71,7 @@ export function ProfitLossChart({ data }: { data: Record<string, unknown>[] }) {
           dataKey="pnl"
           ${fadeEdges}
           showHighlight={false}
+          showValue={${state.lineShowValue}}
           stroke="transparent"
           strokeWidth={0}
         />

@@ -52,7 +52,7 @@ export default function SimpleChart() {
   return (
     <LineChart data={data}>
       <Grid horizontal />
-      <Line dataKey="users" />
+      <Line dataKey="users" showValue />
       <XAxis />
       <ChartTooltip />
     </LineChart>
@@ -126,6 +126,9 @@ Renders a line on the chart.
 | `fadeEdges` | `boolean` | `true` | Fade line at edges |
 | `showHighlight` | `boolean` | `true` | Show highlight on hover |
 | `showMarkers` | `boolean` | `false` | Render scatter-style ring markers at each point |
+| `showValue` | `boolean` | `false` | Show formatted values near data points; crowded labels are omitted |
+| `valueLabelFormatter` | `(value: number) => string` | Persian integer | Format point values |
+| `valueLabelColor` | `string \| (value: number) => string` | Same as `stroke` | Set a fixed or value-based label color |
 | `loadingStroke` | `string` | `var(--foreground)` | Pulse stroke color while chart is loading |
 | `loadingStrokeOpacity` | `number` | `0.5` | Pulse stroke opacity while chart is loading |
 | `markers` | `SeriesPointMarkerStyle` | — | Marker styling (same options as [`Scatter`](/docs/components/scatter-chart)) |

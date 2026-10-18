@@ -67,6 +67,12 @@ export interface LineProps {
   showMarkers?: boolean;
   /** Marker styling (same options as Scatter). */
   markers?: SeriesPointMarkerStyle;
+  /** Show smart, non-overlapping values near data points. Default: false. */
+  showValue?: boolean;
+  /** Format values displayed near data points. Defaults to Persian integers. */
+  valueLabelFormatter?: (value: number) => string;
+  /** Text color for values. Default: same as stroke. */
+  valueLabelColor?: string | ((value: number) => string);
   /**
    * Data index from which the line stroke becomes dashed (inclusive).
    * Useful for projecting incomplete periods, e.g. dashed from yesterday through today.
@@ -332,7 +338,6 @@ export function Line({
           </linearGradient>
         </defs>
       ) : null}
-
       <SeriesHoverDim
         dimOpacity={0.3}
         enabled={effectiveShowHighlight}

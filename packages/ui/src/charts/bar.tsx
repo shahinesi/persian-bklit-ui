@@ -156,13 +156,13 @@ function AnimatedBar({
   const label = valueLabel ? (
     <motion.text
       animate={{ opacity: 1 }}
+      className={valueLabelClassName}
       dominantBaseline="middle"
       fill={valueLabelColor}
       fontSize={12}
       fontWeight={600}
       initial={{ opacity: 0 }}
       textAnchor="middle"
-      className={valueLabelClassName}
       transform={labelTransform}
       transition={enterAnim}
       x={labelX}
@@ -451,9 +451,11 @@ const BarInner = memo(function BarInner({
         const valueLabel = showValue ? valueLabelFormatter(value) : "";
         const labelWidth = valueLabel.length * 7.2;
         const normalFits =
-          barW >= labelWidth + 10 && (isHorizontal ? barHeight >= 22 : barHeight >= 24);
+          barW >= labelWidth + 10 &&
+          (isHorizontal ? barHeight >= 22 : barHeight >= 24);
         const rotatedFits =
-          barHeight >= labelWidth + 10 && (isHorizontal ? barW >= 22 : barW >= 24);
+          barHeight >= labelWidth + 10 &&
+          (isHorizontal ? barW >= 22 : barW >= 24);
         const useRotatedLabel =
           showValue &&
           (valueLabelOrientation === "vertical" ||
@@ -461,18 +463,16 @@ const BarInner = memo(function BarInner({
           rotatedFits;
         const labelFits =
           showValue &&
-          (valueLabelOrientation === "horizontal"
-            ? normalFits
-            : valueLabelOrientation === "vertical"
-              ? rotatedFits
-              : normalFits || rotatedFits);
+          ((valueLabelOrientation === "horizontal" && normalFits) ||
+            (valueLabelOrientation === "vertical" && rotatedFits) ||
+            (valueLabelOrientation === "auto" && (normalFits || rotatedFits)));
         const labelX = x + barW / 2;
-        const labelY =
-          valueLabelPosition === "top"
-            ? y + 14
-            : valueLabelPosition === "bottom"
-              ? y + barHeight - 8
-              : y + barHeight / 2;
+        let labelY = y + barHeight / 2;
+        if (valueLabelPosition === "top") {
+          labelY = y + 14;
+        } else if (valueLabelPosition === "bottom") {
+          labelY = y + barHeight - 8;
+        }
         const labelTransform = useRotatedLabel
           ? `rotate(-90 ${labelX} ${labelY})`
           : undefined;
@@ -490,19 +490,19 @@ const BarInner = memo(function BarInner({
               isFaded={isFaded}
               isHorizontal={isHorizontal}
               key={barKey}
+              labelTransform={labelTransform}
+              labelX={labelX}
+              labelY={labelY}
               revealEpoch={revealEpoch}
               rx={effectiveRx}
               ry={effectiveRy}
               staggerDelay={calculatedStaggerDelay}
+              valueLabel={labelFits ? valueLabel : undefined}
+              valueLabelClassName={valueLabelClassName}
+              valueLabelColor={valueLabelColor}
               width={barW}
               x={x}
               y={y}
-              labelX={labelX}
-              labelY={labelY}
-              valueLabel={labelFits ? valueLabel : undefined}
-              valueLabelColor={valueLabelColor}
-              labelTransform={labelTransform}
-              valueLabelClassName={valueLabelClassName}
             />
           );
         }
@@ -526,12 +526,12 @@ const BarInner = memo(function BarInner({
             />
             {labelFits ? (
               <text
+                className={valueLabelClassName}
                 dominantBaseline="middle"
                 fill={valueLabelColor}
                 fontSize={12}
                 fontWeight={600}
                 textAnchor="middle"
-                className={valueLabelClassName}
                 transform={useRotatedLabel ? labelTransform : undefined}
                 x={labelX}
                 y={labelY}

@@ -296,6 +296,7 @@ export const studioSearchParams = {
   lineChartMode: parseAsStringLiteral(["standard", "profitLoss"]).withDefault(
     "standard"
   ),
+  lineShowValue: parseAsBoolean.withDefault(false),
   lineChartState: parseAsStringLiteral(["ready", "loading"]).withDefault(
     "ready"
   ),
@@ -716,6 +717,7 @@ export interface StudioUrlState {
   dataSeries: number;
   dataPoints: number;
   lineChartMode: "standard" | "profitLoss";
+  lineShowValue: boolean;
   lineChartState: "ready" | "loading";
   areaChartState: "ready" | "loading";
   barChartState: "ready" | "loading";
@@ -1080,6 +1082,7 @@ export function defaultStudioState(
     dataSeries: 2,
     dataPoints: 12,
     lineChartMode: "standard",
+    lineShowValue: false,
     lineChartState: "ready",
     areaChartState: "ready",
     barChartState: "ready",

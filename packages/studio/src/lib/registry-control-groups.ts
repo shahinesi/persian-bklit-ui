@@ -581,6 +581,7 @@ export const lineChartControlGroups: StudioControlGroup[] = [
     },
     { type: "fadeEdges", key: "fadeEdges", label: "Fade edges" },
     { type: "boolean", key: "showHighlight", label: "Highlight on hover" },
+    { type: "boolean", key: "lineShowValue", label: "Value labels" },
   ]),
   seriesMarkersControlGroup,
   lineSeriesTerminalMarkerControlGroup,

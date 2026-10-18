@@ -140,7 +140,10 @@ const BarXAxisInner = memo(function BarXAxisInner({
     const indices = Array.from({ length: visibleCount }, (_, index) =>
       Math.round((index * lastIndex) / (visibleCount - 1))
     );
-    return [...new Set(indices)].map((index) => allLabels[index]!);
+    return [...new Set(indices)].flatMap((index) => {
+      const label = allLabels[index];
+      return label === undefined ? [] : [label];
+    });
   }, [
     barScale,
     bandWidth,
