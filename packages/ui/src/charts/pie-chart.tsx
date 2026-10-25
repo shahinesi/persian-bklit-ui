@@ -230,7 +230,7 @@ const PieChartCore = memo(function PieChartCore({
   // Compute arcs using d3-shape pie
   const arcs = useMemo(() => {
     const pieGenerator = d3Pie<PieData>()
-      .value((d) => d.value)
+      .value((d) => d.visualValue ?? d.value)
       .startAngle(startAngle)
       .endAngle(endAngle)
       .padAngle(padAngle)
@@ -244,7 +244,7 @@ const PieChartCore = memo(function PieChartCore({
       startAngle: arc.startAngle,
       endAngle: arc.endAngle,
       padAngle: arc.padAngle,
-      value: arc.value,
+      value: arc.data.value,
     })) as PieArcData[];
   }, [data, startAngle, endAngle, padAngle]);
 

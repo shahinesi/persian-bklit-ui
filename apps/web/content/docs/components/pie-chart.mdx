@@ -93,7 +93,8 @@ A composable legend component for pie charts and other visualizations. See the f
 ```ts
 interface PieData {
   label: string;      // Display label
-  value: number;      // Value (determines slice size)
+  value: number;      // Actual value used by totals, legends, and PieCenter
+  visualValue?: number; // Optional non-negative slice layout weight
   color?: string;     // Optional color (falls back to palette)
   fill?: string;      // Optional fill for patterns/gradients
 }
@@ -106,6 +107,23 @@ interface LegendItemData {
 ```
 
 See the [charts gallery](/charts/pie-chart) for donut charts, patterns, gradients, legend sync, and hover effects.
+
+### Keeping small slices visible
+
+Set `visualValue` only when a slice needs a larger visual footprint. It controls
+the arc geometry without changing `value`, the total, or the value shown by
+`PieCenter` on hover. Other slices continue to use their actual values.
+
+```tsx
+const data = [
+  { label: "Small segment", value: 1, visualValue: 42 },
+  { label: "Other segments", value: 999 },
+];
+```
+
+Here the small segment occupies about 4% of the circle while its displayed count
+remains 1 and the total remains 1000. Omit `visualValue` for exact proportions;
+keep zero-valued categories at zero, and explain any enlarged slices to readers.
 
 ## Theming
 

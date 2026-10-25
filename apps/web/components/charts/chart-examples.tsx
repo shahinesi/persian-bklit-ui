@@ -4112,6 +4112,11 @@ const pieGradientData: PieData[] = [
   { label: "Segment C", value: 30 },
 ];
 
+const visibleSmallSliceData: PieData[] = [
+  { label: "Small segment", value: 1, visualValue: 42 },
+  { label: "Other segments", value: 999 },
+];
+
 function makePieExamples(): ChartExample[] {
   return [
     {
@@ -4395,6 +4400,32 @@ function makePieExamples(): ChartExample[] {
               <PieSlice hoverEffect="grow" index={index} key={item.label} />
             ))}
             <PieCenter defaultLabel="Browsers" />
+          </PieChart>
+        </div>
+      ),
+    },
+    {
+      title: "Donut Chart - Visible Small Slice",
+      description:
+        "The small slice is enlarged to about 4%; hover counts and the total remain exact.",
+      code: `const data = [
+  { label: "Small segment", value: 1, visualValue: 42 },
+  { label: "Other segments", value: 999 },
+];
+
+<PieChart data={data} innerRadius={55} size={200}>
+  {data.map((item, index) => (
+    <PieSlice index={index} key={item.label} />
+  ))}
+  <PieCenter defaultLabel="Total" />
+</PieChart>`,
+      render: () => (
+        <div className={chartExampleRadialShellClassName}>
+          <PieChart data={visibleSmallSliceData} innerRadius={55}>
+            {visibleSmallSliceData.map((item, index) => (
+              <PieSlice index={index} key={item.label} />
+            ))}
+            <PieCenter defaultLabel="Total" />
           </PieChart>
         </div>
       ),

@@ -37,6 +37,8 @@ export interface PieData {
   label: string;
   /** Value for the slice (determines slice size relative to total) */
   value: number;
+  /** Optional layout weight; displayed values and totals still use value. */
+  visualValue?: number;
   /** Optional color override - falls back to palette */
   color?: string;
   /** Optional fill override for patterns/gradients (e.g., "url(#patternId)") */
